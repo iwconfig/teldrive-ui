@@ -1,18 +1,13 @@
 import { TanStackRouterVite } from "@tanstack/router-vite-plugin"
 import react from "@vitejs/plugin-react"
 import Icons from "unplugin-icons/vite"
-import { defineConfig, loadEnv } from "vite"
+import { defineConfig } from "vite"
 import tsconfigPaths from "vite-tsconfig-paths"
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd())
   return {
     plugins: [
-      TanStackRouterVite({
-        experimental: {
-          enableCodeSplitting: true,
-        },
-      }),
+      TanStackRouterVite(),
       react(),
       tsconfigPaths(),
       Icons({
