@@ -29,15 +29,6 @@ const AudioPreview = ({
   const audio = useAudioStore((state) => state.audio)
 
   useEffect(() => {
-    if (audio) {
-      audio.addEventListener("ended", () => actions.set({ isEnded: true }))
-      audio.addEventListener("loadedmetadata", () =>
-        actions.setDuration(audio.duration)
-      )
-      audio.addEventListener("play", () => actions.set({ isPlaying: true }))
-
-      audio.addEventListener("pause", () => actions.set({ isPlaying: false }))
-    }
     return () => {
       if (audio) {
         unloadAudio(audio)
@@ -47,10 +38,16 @@ const AudioPreview = ({
   }, [audio])
 
   useEffect(() => {
-    if (assetUrl) actions.loadAudio(assetUrl, name)
-  }, [assetUrl, audio])
+    if (assetUrl) {
+      actions.setHandlers({
+        prevItem,
+        nextItem,
+      })
+      actions.loadAudio(assetUrl, name)
+    }
+  }, [assetUrl, prevItem, nextItem])
 
-  return <AudioPlayer nextItem={nextItem} prevItem={prevItem} />
+  return <AudioPlayer />
 }
 
 export default memo(AudioPreview)

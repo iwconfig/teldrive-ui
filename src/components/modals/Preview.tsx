@@ -254,8 +254,8 @@ export default memo(function PreviewModal({
                 </h6>
               </div>
             </div>
-            <ControlButton type="prev" onPress={() => prevItem()} />
-            <ControlButton type="next" onPress={() => nextItem()} />
+            <ControlButton type="prev" onPress={prevItem} />
+            <ControlButton type="next" onPress={nextItem} />
             <div className="px-8 size-full">{renderPreview()}</div>
           </>
         )}

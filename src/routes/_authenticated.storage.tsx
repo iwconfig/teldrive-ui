@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router"
 
+import { StorageView } from "@/components/StorageView"
 import {
   categoryStorageQueryOptions,
   uploadStatsQueryOptions,
@@ -7,6 +8,7 @@ import {
 
 export const Route = createFileRoute("/_authenticated/storage")({
   wrapInSuspense: true,
+  component: StorageView,
   loader: async ({ context: { queryClient }, preload }) => {
     if (preload) {
       await Promise.all([
