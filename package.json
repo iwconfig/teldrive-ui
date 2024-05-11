@@ -5,8 +5,8 @@
   "dependencies": {
     "@hono/auth-js": "^1.0.7",
     "@monaco-editor/react": "^4.6.0",
-    "@tanstack/react-query": "^5.35.1",
-    "@tanstack/react-router": "1.27.0",
+    "@tanstack/react-query": "^5.35.5",
+    "@tanstack/react-router": "1.31.29",
     "@tw-material/file-browser": "^1.0.17",
     "@tw-material/framer-transitions": "^1.1.2",
     "@tw-material/react": "^1.1.18",
@@ -37,10 +37,10 @@
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
-    "@iconify/json": "^2.2.207",
+    "@iconify/json": "^2.2.208",
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
-    "@tanstack/react-query-devtools": "^5.35.1",
+    "@tanstack/react-query-devtools": "^5.35.5",
     "@tanstack/router-vite-plugin": "^1.31.18",
     "@types/lodash.debounce": "^4.0.9",
     "@types/md5": "^2.3.5",
