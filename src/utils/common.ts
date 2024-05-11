@@ -52,9 +52,19 @@ export const copyDataToClipboard = (data: string[]) => {
 }
 
 export function formatDuration(value: number) {
-  const minute = Math.floor(value / 60)
-  const secondLeft = Math.floor(value - minute * 60)
-  return `${minute}:${secondLeft < 10 ? `0${secondLeft}` : secondLeft}`
+  if (isNaN(value)) {
+    return "00:00"
+  }
+
+  const hours = Math.floor(value / 3600)
+  const minutes = Math.floor((value % 3600) / 60)
+  const seconds = Math.floor(value % 60)
+
+  const formattedHours = hours > 0 ? `${hours}:` : ""
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`
+
+  return `${formattedHours}${formattedMinutes}:${formattedSeconds}`
 }
 
 export function formatTime(epochTime: number): string {
