@@ -1,5 +1,5 @@
 import { useCallback } from "react"
-import type { QueryParams, Session } from "@/types"
+import type { QueryParams } from "@/types"
 import { useQueryClient } from "@tanstack/react-query"
 import {
   defineFileAction,
