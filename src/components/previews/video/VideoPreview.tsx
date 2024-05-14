@@ -56,7 +56,7 @@ const VideoPlayer = ({ name, assetUrl }: VideoPlayerProps) => {
       //@ts-ignore
       const signal = AbortSignal.any([
         requestAbort.signal,
-        AbortSignal.timeout(5000),
+        AbortSignal.timeout(3000),
       ])
       fetch(assetUrl, {
         headers: { Range: "bytes=0-" },
