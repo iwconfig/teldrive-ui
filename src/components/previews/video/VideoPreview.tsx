@@ -52,18 +52,16 @@ const VideoPlayer = ({ name, assetUrl }: VideoPlayerProps) => {
     let requestAbort: AbortController | null = null
 
     if (artInstance?.current && assetUrl) {
-      if (assetUrl.includes("rclone=1")) {
-        requestAbort = new AbortController()
-        //@ts-ignore
-        const signal = AbortSignal.any([
-          requestAbort.signal,
-          AbortSignal.timeout(5000),
-        ])
-        fetch(assetUrl, {
-          headers: { Range: "bytes=0-" },
-          signal: signal,
-        }).finally(() => artInstance.current?.switchUrl(assetUrl))
-      } else artInstance.current.switchUrl(assetUrl)
+      requestAbort = new AbortController()
+      //@ts-ignore
+      const signal = AbortSignal.any([
+        requestAbort.signal,
+        AbortSignal.timeout(5000),
+      ])
+      fetch(assetUrl, {
+        headers: { Range: "bytes=0-" },
+        signal: signal,
+      }).finally(() => artInstance.current?.switchUrl(assetUrl))
     }
     return () => {
       if (requestAbort) requestAbort.abort()
