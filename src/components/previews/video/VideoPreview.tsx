@@ -49,23 +49,11 @@ const VideoPlayer = ({ name, assetUrl }: VideoPlayerProps) => {
   }
 
   useEffect(() => {
-    let requestAbort: AbortController | null = null
-
-    if (artInstance?.current && assetUrl) {
-      requestAbort = new AbortController()
-      //@ts-ignore
-      const signal = AbortSignal.any([
-        requestAbort.signal,
-        AbortSignal.timeout(3000),
-      ])
-      fetch(assetUrl, {
-        headers: { Range: "bytes=0-" },
-        signal: signal,
-      }).finally(() => artInstance.current?.switchUrl(assetUrl))
+    if (artInstance.current && assetUrl) {
+      artInstance.current.switchUrl(assetUrl)
+      artInstance.current.title = name
     }
     return () => {
-      if (requestAbort) requestAbort.abort()
-
       if (artInstance.current) {
         artInstance.current.video.pause()
         artInstance.current.video.removeAttribute("src")
