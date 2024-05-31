@@ -64,6 +64,7 @@ export type Session = {
 export type QueryParams = {
   type: BrowseView
   path: string
+  filter?: Record<string, string>
 }
 
 export type Tags = {
@@ -104,3 +105,10 @@ export type BrowseView =
   | "category"
 
 export type FileQueryKey = (string | QueryParams)[]
+
+export type FilterQuery = {
+  category?: string
+  path?: string
+  query?: string
+  updatedAt?: string
+}

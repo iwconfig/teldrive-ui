@@ -12,6 +12,7 @@ import {
 } from "@tw-material/file-browser"
 import IconFlatColorIconsVlc from "~icons/flat-color-icons/vlc"
 import IconPotPlayerIcon from "~icons/material-symbols/play-circle-rounded"
+import RadixIconsOpenInNewWindow from "~icons/radix-icons/open-in-new-window"
 import toast from "react-hot-toast"
 
 import { mediaUrl, navigateToExternalUrl } from "@/utils/common"
@@ -53,6 +54,17 @@ const CustomActions = {
       icon: FbIconName.copy,
     },
   } as const),
+  OpenInNew: defineFileAction({
+    id: "open_new_tab",
+    requiresSelection: true,
+    fileFilter: (file) => file?.previewType === "video",
+    button: {
+      name: "Open In New Tab",
+      contextMenu: true,
+      group: "OpenOptions",
+      icon: RadixIconsOpenInNewWindow,
+    },
+  } as const),
 }
 
 type FbActionFullUnion =
@@ -75,7 +87,10 @@ export const useFileAction = (params: QueryParams) => {
           const fileToOpen = targetFile ?? files[0]
 
           if (fileToOpen && FileHelper.isDirectory(fileToOpen)) {
-            preloadFiles(fileToOpen.path, "my-drive")
+            preloadFiles({
+              type: "my-drive",
+              path: fileToOpen.path,
+            })
           } else if (fileToOpen && FileHelper.isOpenable(fileToOpen)) {
             actions.set({
               open: true,
@@ -113,6 +128,12 @@ export const useFileAction = (params: QueryParams) => {
           navigateToExternalUrl(url, false)
           break
         }
+        case CustomActions.OpenInNew.id: {
+          const { selectedFiles } = data.state
+          const { id, name } = selectedFiles[0]
+          navigateToExternalUrl(`/watch/${id}/${name}`, true)
+          break
+        }
         case FbActions.RenameFile.id: {
           actions.set({
             open: true,
@@ -142,7 +163,7 @@ export const useFileAction = (params: QueryParams) => {
           let clipboardText = ""
           selections.forEach((element) => {
             if (!FileHelper.isDirectory(element)) {
-              const { id, name, path } = element
+              const { id, name } = element
               clipboardText = `${clipboardText}${mediaUrl(id, name)}\n`
             }
           })
