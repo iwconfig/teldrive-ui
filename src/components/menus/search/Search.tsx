@@ -45,7 +45,7 @@ const categories = [
   { value: "other", icon: IconFaSolidFile },
 ]
 
-const locations = ["any", "current"]
+const locations = ["current"]
 
 const modifiedDateValues = [
   { value: "7", label: "Last 7 days" },
@@ -115,7 +115,7 @@ export const SearchMenu = memo(
             pathname.includes("/my-drive")
           ) {
             const path = pathname.split("/my-drive")[1] || "/"
-            filterQuery.path = path
+            filterQuery.path = decodeURI(path)
           } else if (key === "query" && value) {
             filterQuery[key] = value
           }
@@ -172,7 +172,7 @@ export const SearchMenu = memo(
               <CheckboxGroup
                 classNames={{
                   wrapper: "gap-2",
-                  label: "text-md text-inherit",
+                  label: "text-md text-inherit select-none",
                 }}
                 label="Category"
                 orientation="horizontal"
@@ -218,7 +218,7 @@ export const SearchMenu = memo(
                 label="Location"
                 classNames={{
                   wrapper: "gap-16",
-                  label: "text-md text-inherit",
+                  label: "text-md text-inherit select-none",
                 }}
                 orientation="horizontal"
                 {...field}
@@ -240,7 +240,7 @@ export const SearchMenu = memo(
                 classNames={{
                   wrapper:
                     "grid gap-2 grid-cols-[repeat(auto-fit,minmax(100px,min-content))]",
-                  label: "text-md text-inherit",
+                  label: "text-md text-inherit select-none",
                 }}
                 {...field}
               >
@@ -248,7 +248,7 @@ export const SearchMenu = memo(
                   <Radio
                     classNames={{
                       base: "items-baseline",
-                      label: "text-sm",
+                      label: "text-sm select-none",
                     }}
                     value={date.value}
                     key={date.value}
