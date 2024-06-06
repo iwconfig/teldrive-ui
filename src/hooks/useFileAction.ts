@@ -89,7 +89,10 @@ export const useFileAction = (params: QueryParams) => {
           if (fileToOpen && FileHelper.isDirectory(fileToOpen)) {
             preloadFiles({
               type: "my-drive",
-              path: fileToOpen.path,
+              path:
+                fileToOpen.path || fileToOpen.path == ""
+                  ? fileToOpen.path
+                  : params.path + "/" + fileToOpen.name,
             })
           } else if (fileToOpen && FileHelper.isOpenable(fileToOpen)) {
             actions.set({
@@ -211,7 +214,7 @@ export const useFileAction = (params: QueryParams) => {
           break
       }
     }
-  }, [params.type])
+  }, [params.type, params.path])
 }
 
 export const fileActions = Object.keys(CustomActions).map(
