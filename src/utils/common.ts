@@ -111,16 +111,8 @@ export function extractPathParts(path: string): {
   }
 }
 
-export const mediaUrl = (
-  id: string,
-  name: string,
-  path = "",
-  download = false
-) => {
-  if (path && settings.rcloneMediaProxy)
-    return `${settings.rcloneMediaProxy}${path}/${encodeURIComponent(name)}`
-
-  const host = window.location.origin
+export const mediaUrl = (id: string, name: string, download = false) => {
+  const host = settings.mediaProxy || window.location.origin
   const mediaPath = `${id}/${encodeURIComponent(name)}${download ? "?d=1" : ""}`
   return `${host}/api/files/stream/${mediaPath}`
 }

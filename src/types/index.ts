@@ -46,7 +46,7 @@ export type Message = {
 
 export type Settings = {
   pageSize: number
-  rcloneMediaProxy: string
+  mediaProxy: string
 }
 
 export type Session = {

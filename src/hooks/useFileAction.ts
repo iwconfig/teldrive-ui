@@ -109,7 +109,7 @@ export const useFileAction = (params: QueryParams) => {
           for (const file of selectedFiles) {
             if (!file.isDir) {
               const { id, name, path } = file
-              const url = mediaUrl(id, name, params.path || path, true)
+              const url = mediaUrl(id, name, true)
               navigateToExternalUrl(url, false)
             }
           }
@@ -119,7 +119,7 @@ export const useFileAction = (params: QueryParams) => {
           const { selectedFiles } = data.state
           const fileToOpen = selectedFiles[0]
           const { id, name, path } = fileToOpen
-          const url = `vlc://${mediaUrl(id, name, params.path || path)}`
+          const url = `vlc://${mediaUrl(id, name)}`
           navigateToExternalUrl(url, false)
           break
         }
@@ -127,7 +127,7 @@ export const useFileAction = (params: QueryParams) => {
           const { selectedFiles } = data.state
           const fileToOpen = selectedFiles[0]
           const { id, name, path } = fileToOpen
-          const url = `potplayer://${mediaUrl(id, name, params.path || path)}`
+          const url = `potplayer://${mediaUrl(id, name)}`
           navigateToExternalUrl(url, false)
           break
         }

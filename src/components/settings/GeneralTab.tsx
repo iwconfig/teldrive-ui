@@ -24,13 +24,13 @@ export const GeneralTab = memo(() => {
       )}
     >
       <div className="col-span-6 xs:col-span-3">
-        <p className="text-lg font-medium">Rclone Media Proxy</p>
+        <p className="text-lg font-medium">Media Proxy</p>
         <p className="text-sm font-normal text-on-surface-variant">
-          Rclone HTTP Server URL
+          Base Media URL
         </p>
       </div>
       <Controller
-        name="rcloneMediaProxy"
+        name="mediaProxy"
         control={control}
         render={({ field, fieldState: { error } }) => (
           <Input
