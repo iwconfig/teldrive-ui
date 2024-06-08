@@ -1,5 +1,5 @@
 import { memo } from "react"
-import { getRouteApi, Outlet, useParams } from "@tanstack/react-router"
+import { getRouteApi, Outlet } from "@tanstack/react-router"
 import { Button } from "@tw-material/react"
 import CodiconSettings from "~icons/codicon/settings"
 import FluentDarkTheme20Filled from "~icons/fluent/dark-theme-20-filled"
